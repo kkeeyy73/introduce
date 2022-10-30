@@ -1,0 +1,146 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap');
+
+:root {
+    --primary: #0d6efd;
+    --dark: #21252f;
+    --body: rgb(163, 163, 163);
+    --box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+}
+
+body {
+    font-family: 'Sora', sans-serif;
+    line-height: 1.7;
+    color: var(--body);
+}
+
+h1,h2,h3,h4,h5,h6.display-4 {
+    color: var(--dark);
+    font-weight: 700;
+}
+
+a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+.display-4 {
+    width: 0;
+    border-right: 0.08em solid #fff; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    animation: typing 2.5s steps(11, end) forwards, cursol 1s step-end infinite;
+}
+
+@keyframes typing{
+    0% { width: 0%; }
+    100% { width: 11em; }
+}
+
+@keyframes cursol{
+    0%{ border-color: transparent; }
+    50%{ border-color: #fff; } 
+    100%{ border-color: transparent; }
+}
+
+.navbarScroll.navbarDark{
+    background-color: var(--dark);
+}
+
+.navbar-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+  
+.navbar .nav-link {
+    color: white !important;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.hero {
+    background-image: url("images/miyazaki18.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    object-fit: cover;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(37, 39, 71, 0.2);
+    z-index: -1;
+}
+
+
+.imageAbout {
+    width: 100%;
+}
+
+.card-effect {
+    box-shadow: var(--box-shadow);
+    background-color: #fff;
+    padding: 25px;
+    transition: all 0.35s ease;
+}
+
+.card-effect:hover {
+    box-shadow: none;
+    transform: translateY(5px);
+}
+
+.learning {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.learning::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    background-color: #069;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.35s ease;
+    z-index: -1;
+}
+
+.learning:hover h5,
+.learning:hover p{
+    color: white;
+}
+
+.learning:hover::after {
+    opacity: 1;
+    top: 0;
+}
+
+form input.form-control {
+    height: 56px;
+}
+
+form .form-control {
+    border: transparent;
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.footer-top{
+    background-color: var(--dark);
+    padding: 20px;
+    padding-bottom: 10px;
+}
+
+small {
+    color: #fff;
+}
