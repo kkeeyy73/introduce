@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     /*エラーがなければmailを送信*/
     if(count($error_name) === 0 && count($error_email) === 0 && count($error_validate) === 0 && count($error_msg) === 0){
-        $to = 'keiky003@gmail.com';
+        $to = '';
         $from = $post['email'];
         $subject = $post['subject'];
         $body = <<<EOT
@@ -119,8 +119,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                                     <ul class="Aboutme text-dark list-unstyled border-top border-bottom border-second">
                                         <li>Name: Kei Katayama</li>
                                         <li>Age: 31</li>
-                                        <li>From: Miyazaki</li>
-                                        <li><img src="images/mail_icon.png" class="imageAboutme" alt="">: keiky003@gmail.com</li>
+                                        <li>From: Miyazaki</li
                                     </ul>
                                 </div>
                             </div>
