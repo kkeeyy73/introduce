@@ -35,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     /*エラーがなければmailを送信*/
     if(count($error) === 0){
-        $to = 'keiky003@gmail.com';
+        $to = '';
         $from = $post['email'];
         $subject = $post['subject'];
         $body = <<<EOT
