@@ -1,8 +1,6 @@
 <?php
-$error_name = [];
-$error_email = [];
-$error_validate = [];
-$error_msg = [];
+//変数の初期化
+$error = [];
 
 $post = [
     'name'=>'',
@@ -16,15 +14,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $post['name'] = htmlspecialchars($_POST['name'], ENT_QUOTES);
     /*nameが空白ならエラーを返す*/
     if($post['name'] === ''){
-        $error_name[] = "blank";
+        $error['name'] = 'blank';
     }
     /*emaiのチェック*/
     $post['email'] = htmlspecialchars($_POST['email'], ENT_QUOTES);
     /*mailが空白・書式が違えばエラーを返す*/
     if($post['email'] === ''){
-        $error_email[] = "blank";
+        $error['email'] = 'blank';
     }else if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL)){
-        $error_validate[] = "email";
+        $error['email'] = 'email';
     }
     /*subjectのチェック*/
     $post['subject'] = htmlspecialchars($_POST['subject'], ENT_QUOTES);
@@ -32,11 +30,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $post['message'] = htmlspecialchars($_POST['message'], ENT_QUOTES);
     /*messsageが空白ならエラーを返す*/
     if($post['message'] === ''){
-        $error_msg[] = "blank";
+        $error['message'] = 'blank';
     }
 
     /*エラーがなければmailを送信*/
-    if(count($error_name) === 0 && count($error_email) === 0 && count($error_validate) === 0 && count($error_msg) === 0){
+    if(count($error) === 0){
         $to = 'keiky003@gmail.com';
         $from = $post['email'];
         $subject = $post['subject'];
@@ -45,10 +43,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         メールアドレス : {$post['email']}
         内容 : {$post['message']}
         EOT;
-        var_dump($body);
-        //mb_send_mail($to, $subject, $body, "From: {$from}");
-        exit();
+        
+        mb_send_mail($to, $subject, $body, "From: {$from}");
     }
+    header('Location: thanks.html');
 }
 ?>
 <!DOCTYPE html>
@@ -61,7 +59,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link href="style.css" rel="stylesheet">
-        <title></title>
+        <meta name="description" content="ポートフォリオサイトです。">
+        <title>kei's&nbsp;Portfolio</title>
         </head>
     <body>
         <header>
@@ -110,23 +109,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     <div class="row mt-4">
                         <h1 class="text-center">About me</h1>
                         <div class="col-lg-4">
-                            <img src="images/cat.jpg" class="imageAbout" alt="">
+                            <img src="images/neko2.png" class="imageAbout" alt="">
                         </div>
                         <div class="col-lg-8 text-dark">
                             <p>皆様、初めまして。現在IT系の職業訓練を受講をしています。その中で学んだことをまとめるサイトを作成しました。</p>
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <ul class="Aboutme text-dark list-unstyled border-top border-bottom border-second">
-                                        <li>Name: Kei Katayama</li>
-                                        <li>Age: 31</li>
-                                        <li>From: Miyazaki</li>
-                                        <li><img src="images/mail_icon.png" class="imageAboutme" alt="">: keiky003@gmail.com</li>
+                                        <li>Name:&nbsp;潟山&nbsp;恵</li>
+                                        <li>Age:&nbsp;31歳</li>
+                                        <li>From:&nbsp;宮崎県</li>
+                                        <li>Hobby:&nbsp;映画/海外ドラマ・ゲーム</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="row-mt3">
                                 <p>宮崎県出身の31才です。前職は、24才から6年間ほど消防設備士として官公庁や一般の建物の消防設備点検・設置工事の設計、施工に従事してきました。<br>
-                                   従事している時に、Chatworkなどのツールに触れIT業界に興味を持ち始めました。現在、職業訓練校に通いITの基礎知識等を学んでいます。</p>
+                                   従事している時に、Chatworkなどのツールに触れIT業界に興味を持ち始めました。</p>
                             </div>
                         </div>
                     </div>
@@ -144,21 +143,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     <div class="row g-4">
                         <div class="col-lg-4 col-sm-4">
                             <div class="learning card-effect w-auto h-100">
-                                <h5 class="mt-4 mb-2"><img src="images/html_icon.png" class="imageHTML" ait="">
+                                <h5 class="mt-4 mb-2"><img src="images/HTML_icon.png" class="imageHTML" ait="">
                                 <img src="images/CSS_icon.png" class="imageCSS" ait="">HTML/CSS</h5>
-                                <p>主にwebクリエイター能力認定試験の公式テキストを使いながらHTML/CSSの基礎、デザインについて学びました。</p>
+                                <p class="text-dark">主にwebクリエイター能力認定試験の公式テキストを使いながらHTML/CSSの書き方、レスポンシブデザインについて学びました。</p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-4">
                             <div class="learning card-effect w-auto h-100">
                                 <h5 class="mt-4 mb-2"><img src="images/PHP_icon.png" class="imagePHP" alr="">PHP</h5>
-                                <p>PHPで何ができるか、環境構築の仕方、基本構文、フォーム入力データの使い方、データベースとの連携を学びました。</p>
+                                <p class="text-dark">環境構築の仕方、基本構文、フォーム入力データの使い方、データベースとの連携を学びました。</p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-4">
                             <div class="learning card-effect w-auto h-100">
                                 <h5 class="mt-4 mb-2"><img src="images/Java_icon.png" class="imageJava" ait="">Java</h5>
-                                <p>基本情報技術者試験の為自己学習をしながら基本構文、オブジェクト志向を学んでいます。</p>
+                                <p class="text-dark">基本情報技術者試験の為自己学習をしながら基本構文、オブジェクト志向を学んでいます。</p>
                             </div>
                         </div>
                     </div>
@@ -178,18 +177,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                             <div class="portfolio card-effect w-auto h-100">
                                 <h5 class="mt-4 mb-2 border-bottom border-dark">Website</h5>
                                     <img src="images/website.jpg" class="imageWebsite img-fluid" alt="">
-                                <p class="text-break mt-3">HTML/CSS,BootStrapを使いデザインしました。<br>
+                                <p class="text-break mt-3 text-dark">HTML/CSS,BootStrapを使いデザインしました。<br>
                                 Bootstrapを使用しレスポンシブデザインに対応させました。<br>また、お問い合わせのメール送信処理は、PHPを使用しています。</p>
+                                <div class="text-center">
+                                    <a href="https://github.com/kkeeyy73/introduce.git"><img src="images/github_icon.png" class="githubimage" alt=""></a>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6">
                             <div class="portfolio card-effect w-auto h-100">
                                 <h5 class="mt-4 mb-2 border-bottom border-dark">ひとこと掲示板</h5>
                                 <img src="images/bbs.png" class="imageBbs img-fluid" alt="">
-                                <p class="text-break mt-3">PHP,HTML/CSS,BootStrapを使いひとこと掲示板を作成しました。
-                                ログイン機能、禁止文字の指定などを実装しました。</p>
+                                <p class="text-break mt-3 text-dark">PHP,HTML/CSS,BootStrapを使いひとこと掲示板を作成しました。
+                                ログイン機能、禁止文字の指定、投稿内容の削除機能を実装しました。</p>
                                 <div class="text-center">
-                                    <a href="#" class="btn btn-success">Link</a>
+                                    <a href="https://hitokoto-bbs.com" class="btn btn-success">Link</a>
                                     <a href="https://github.com/kkeeyy73/bbs-PHP-.git"><img src="images/github_icon.png" class="githubimage" alt=""></a>
                                 </div>
                             </div>
@@ -207,16 +209,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                             <form action="" method="POST" class="row g-3 justify-content-center">
                                 <div class="col-md-5">
                                     <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" value="<?php echo htmlspecialchars($post['name']); ?>">
-                                    <?php if(!empty($error_name)): ?>
+                                    <?php if(isset($error['name']) && $error['name'] === 'blank'): ?>
                                         <p class="error_msg text-danger">※お名前をご記入ください</p>
                                     <?php endif; ?>
                                 </div>
                                 <div class="col-md-5">
                                     <input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo htmlspecialchars($post['email']); ?>">
-                                    <?php if(!empty($error_email)): ?>
+                                    <?php if(isset($error['email']) && $error['email'] === 'blank'): ?>
                                         <p class="error_msg text-danger">※メールアドレスをご記入ください</p>
                                     <?php endif; ?>
-                                    <?php if(!empty($error_email)): ?>
+                                    <?php if(isset($error['email']) && $error['email'] === 'email'): ?>
                                         <p class="error_msg text-danger">※正しくご記入ください</p>
                                     <?php endif; ?>
                                 </div>
@@ -225,7 +227,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                                 </div>
                                 <div class="col-md-10">
                                     <textarea name="message" cols="30" rows="10" class="form-control" placeholder="Message" value="<?php echo htmlspecialchars($post['message']); ?>"></textarea>
-                                    <?php if(!empty($error_msg)): ?>
+                                    <?php if(isset($error['message']) && $error['message'] === 'blank'): ?>
                                         <p class="error_msg text-danger">※メッセージ内容をご記入ください</p>
                                     <?php endif; ?>
                                 </div>
