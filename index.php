@@ -45,8 +45,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         EOT;
         
         mb_send_mail($to, $subject, $body, "From: {$from}");
+        header('Location: thanks.html');
+        exit();
     }
-    header('Location: thanks.html');
 }
 ?>
 <!DOCTYPE html>
