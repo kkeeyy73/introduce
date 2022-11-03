@@ -42,8 +42,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         名前 : {$post['name']}
         メールアドレス : {$post['email']}
         内容 : {$post['message']}
-        EOT;
-        
+        EOT;       
         mb_send_mail($to, $subject, $body, "From: {$from}");
         header('Location: thanks.html');
         exit();
